@@ -9,9 +9,7 @@
 
 namespace APIPHP\Localise;
 
-use APIPHP\Localise\Api\Stats;
 use APIPHP\Localise\Api\Translation;
-use APIPHP\Localise\Api\Tweet;
 use Http\Client\Common\HttpMethodsClient;
 use APIPHP\Localise\Deserializer\ModelDeserializer;
 use APIPHP\Localise\Deserializer\ResponseDeserializer;

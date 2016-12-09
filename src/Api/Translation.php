@@ -9,7 +9,6 @@
 
 namespace APIPHP\Localise\Api;
 
-use APIPHP\Localise\Exception\InvalidArgumentException;
 use APIPHP\Localise\Resource\Api\Translation\CreateResponse;
 use APIPHP\Localise\Resource\Api\Translation\DeleteResponse;
 use APIPHP\Localise\Resource\Api\Translation\ShowResponse;
@@ -74,5 +73,4 @@ class Translation extends HttpApi
 
         return $this->deserializer->deserialize($response, DeleteResponse::class);
     }
-
 }
