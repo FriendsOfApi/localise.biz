@@ -21,7 +21,7 @@ $ composer require api-php/localise.biz
 
 ```php
 $apiClient = new LocoClient();
-$response = $apiClient->translation()->show('project_key', 'hello_world, 'sv');
+$response = $apiClient->translations()->show('project_key', 'hello_world', 'sv');
 echo $response->getTranslation(); // "Hej världen"
 ```
 

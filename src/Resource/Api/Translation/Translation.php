@@ -7,67 +7,67 @@ trait Translation
     /**
      * @var string
      */
-    private $id;
+    private $id = '';
 
     /**
      * @var string
      */
-    private $type;
+    private $type = '';
 
     /**
      * @var bool
      */
-    private $translated;
+    private $translated = false;
 
     /**
      * @var bool
      */
-    private $flagged;
+    private $flagged = false;
 
     /**
      * @var string
      */
-    private $status;
+    private $status = '';
 
     /**
      * @var string
      */
-    private $translation;
+    private $translation = '';
 
     /**
      * @var int
      */
-    private $revision;
+    private $revision = 0;
 
     /**
      * @var int
      */
-    private $comments;
+    private $comments = 0;
 
     /**
      * @var string
      */
-    private $modified;
+    private $modified = '';
 
     /**
      * @var array
      */
-    private $author;
+    private $author = [];
 
     /**
      * @var array
      */
-    private $flagger;
+    private $flagger = [];
 
     /**
      * @var array
      */
-    private $locale;
+    private $locale = [];
 
     /**
      * @var array
      */
-    private $plurals;
+    private $plurals = [];
 
     private function __construct()
     {
@@ -82,43 +82,43 @@ trait Translation
     {
         $self = new self();
 
-        if ($data['id']) {
+        if (isset($data['id'])) {
             $self->setId($data['id']);
         }
-        if ($data['type']) {
+        if (isset($data['type'])) {
             $self->setType($data['type']);
         }
-        if ($data['translated']) {
+        if (isset($data['translated'])) {
             $self->setTranslated($data['translated']);
         }
-        if ($data['flagged']) {
+        if (isset($data['flagged'])) {
             $self->setFlagged($data['flagged']);
         }
-        if ($data['status']) {
+        if (isset($data['status'])) {
             $self->setStatus($data['status']);
         }
-        if ($data['translation']) {
+        if (isset($data['translation'])) {
             $self->setTranslation($data['translation']);
         }
-        if ($data['revision']) {
+        if (isset($data['revision'])) {
             $self->setRevision($data['revision']);
         }
-        if ($data['comments']) {
+        if (isset($data['comments'])) {
             $self->setComments($data['comments']);
         }
-        if ($data['modified']) {
+        if (isset($data['modified'])) {
             $self->setModified($data['modified']);
         }
-        if ($data['author']) {
+        if (isset($data['author'])) {
             $self->setAuthor($data['author']);
         }
-        if ($data['flagger']) {
+        if (isset($data['flagger'])) {
             $self->setFlagger($data['flagger']);
         }
-        if ($data['locale']) {
+        if (isset($data['locale'])) {
             $self->setLocale($data['locale']);
         }
-        if ($data['plurals']) {
+        if (isset($data['plurals'])) {
             $self->setPlurals($data['plurals']);
         }
 
