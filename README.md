@@ -1,4 +1,4 @@
-# API-php Boilerplate
+# Localise.biz (Logo) API client
 
 [![Latest Version](https://img.shields.io/github/release/api-php/localise.biz.svg?style=flat-square)](https://github.com/api-php/localise.biz/releases)
 [![Build Status](https://img.shields.io/travis/api-php/localise.biz.svg?style=flat-square)](https://travis-ci.org/api-php/localise.biz)
