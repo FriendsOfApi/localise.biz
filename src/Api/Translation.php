@@ -35,29 +35,33 @@ class Translation extends HttpApi
         $response = $this->httpGet(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
 
         // TODO handle non 200 responses
-
         return $this->deserializer->deserialize($response, ShowResponse::class);
     }
 
     /**
-     * @param array $params
+     * @param string $projectKey
+     * @param string $id
+     * @param string $locale
+     * @param string $translation
      *
      * @return CreateResponse
      */
-    public function create(string $projectKey, string $id, string $locale)
+    public function create(string $projectKey, string $id, string $locale, string $translation)
     {
         Assert::notEmpty($projectKey);
         Assert::notEmpty($id);
         Assert::notEmpty($locale);
 
-        $response = $this->httpPost(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
+        $response = $this->httpPostRaw(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey), $translation);
 
         // TODO handle non 200 responses
         return $this->deserializer->deserialize($response, CreateResponse::class);
     }
 
     /**
-     * @param array $params
+     * @param string $projectKey
+     * @param string $id
+     * @param string $locale
      *
      * @return DeleteResponse
      */
@@ -70,7 +74,6 @@ class Translation extends HttpApi
         $response = $this->httpDelete(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
 
         // TODO handle non 200 responses
-
         return $this->deserializer->deserialize($response, DeleteResponse::class);
     }
 }
