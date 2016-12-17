@@ -57,9 +57,6 @@ class CreateResponse implements ApiResponse
      */
     private $tags = [];
 
-    /**
-     *
-     */
     private function __construct()
     {
     }

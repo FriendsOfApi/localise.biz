@@ -17,7 +17,6 @@ use Webmozart\Assert\Assert;
  */
 class Asset extends HttpApi
 {
-
     /**
      * @param string $projectKey
      * @param string $id
@@ -32,10 +31,10 @@ class Asset extends HttpApi
         Assert::notEmpty($id);
 
         $param = [
-            'name'=>$id,
-            'id'=>$id,
-            'type'=>'text',
-            'default'=>'untranslated',
+            'name' => $id,
+            'id' => $id,
+            'type' => 'text',
+            'default' => 'untranslated',
         ];
 
         $response = $this->httpPost(sprintf('/api/assets?key=%s', $projectKey), $param);
@@ -44,5 +43,4 @@ class Asset extends HttpApi
         // TODO handle 409 response
         return $this->deserializer->deserialize($response, CreateResponse::class);
     }
-
 }
