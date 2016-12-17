@@ -9,6 +9,7 @@
 
 namespace APIPHP\Localise;
 
+use APIPHP\Localise\Api\Asset;
 use APIPHP\Localise\Api\Translation;
 use Http\Client\Common\HttpMethodsClient;
 use APIPHP\Localise\Deserializer\ModelDeserializer;
@@ -56,5 +57,13 @@ class LocoClient
     public function translations(): Translation
     {
         return new Api\Translation($this->httpClient, $this->requestBuilder, $this->deserializer);
+    }
+
+    /**
+     * @return Api\Asset
+     */
+    public function asset(): Asset
+    {
+        return new Api\Asset($this->httpClient, $this->requestBuilder, $this->deserializer);
     }
 }
