@@ -80,6 +80,7 @@ abstract class HttpApi
     protected function httpPost($path, array $parameters = [], array $requestHeaders = []): ResponseInterface
     {
         $requestHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
+
         return $this->httpPostRaw($path, http_build_query($parameters), $requestHeaders);
     }
 
@@ -111,6 +112,7 @@ abstract class HttpApi
     protected function httpPut($path, array $parameters = [], array $requestHeaders = []): ResponseInterface
     {
         $requestHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
+
         return $this->httpClient->sendRequest(
             $this->requestBuilder->create('PUT', $path, $requestHeaders, http_build_query($parameters))
         );
@@ -128,6 +130,7 @@ abstract class HttpApi
     protected function httpDelete($path, array $parameters = [], array $requestHeaders = []): ResponseInterface
     {
         $requestHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
+
         return $this->httpClient->sendRequest(
             $this->requestBuilder->create('DELETE', $path, $requestHeaders, http_build_query($parameters))
         );
