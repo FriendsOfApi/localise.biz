@@ -1,5 +1,5 @@
 {
-    "name": "api-php/localise.biz",
+    "name": "friendsofapi/localise.biz",
     "description": "A community API client for localise.biz translation service",
     "license": "MIT",
     "keywords": ["loco", "localise.biz", "localise", "translation"],
