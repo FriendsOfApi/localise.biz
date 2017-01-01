@@ -71,18 +71,6 @@ final class LocoClient
     }
 
     /**
-     * @param string $apiKey
-     *
-     * @return ApiClient
-     */
-    public static function create(string $apiKey): ApiClient
-    {
-        $httpClientConfigurator = (new HttpClientConfigurator())->setApiKey($apiKey);
-
-        return self::configure($httpClientConfigurator);
-    }
-
-    /**
      * @return Api\Translation
      */
     public function translations(): Translation
