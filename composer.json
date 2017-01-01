@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "APIPHP\\Localise\\": "src/"
+            "FAPI\\Localise\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "APIPHP\\Localise\\Tests\\": "tests/"
+            "FAPI\\Localise\\Tests\\": "tests/"
         }
     },
     "scripts": {

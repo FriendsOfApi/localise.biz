@@ -7,9 +7,9 @@ declare(strict_types=1);
  * of the MIT license. See the LICENSE file for details.
  */
 
-namespace FAPI\boilerplate\tests;
+namespace FAPI\Localise\Tests;
 
-use FAPI\Boilerplate\HttpClientConfigurator;
+use FAPI\Localise\HttpClientConfigurator;
 use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Nyholm\NSA;
 
