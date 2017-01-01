@@ -1,13 +1,13 @@
 <?php
 
-namespace APIPHP\Localise\Resource\Api\Translation;
+namespace FAPI\Localise\Resource\Api\Translation;
 
-use APIPHP\Localise\Resource\ApiResponse;
+use FAPI\Localise\Model\CreatableFromArray;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class DeleteResponse implements ApiResponse
+class TranslationDeleted implements CreatableFromArray
 {
     private $status;
     private $message;
@@ -25,9 +25,9 @@ class DeleteResponse implements ApiResponse
     /**
      * @param array $data
      *
-     * @return DeleteResponse
+     * @return TranslationDeleted
      */
-    public static function create(array $data)
+    public static function createFromArray(array $data)
     {
         $status = 0;
         $message = '';
