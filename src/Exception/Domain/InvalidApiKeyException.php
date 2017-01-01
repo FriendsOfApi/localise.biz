@@ -10,8 +10,6 @@ namespace FAPI\Localise\Exception\Domain;
 use FAPI\Localise\Exception\DomainException;
 
 /**
- *
- *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class InvalidApiKeyException extends \Exception implements DomainException

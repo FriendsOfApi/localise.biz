@@ -14,7 +14,6 @@ use FAPI\Localise\Resource\Api\Translation\Translation as TranslationModel;
 use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
 
-
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
@@ -22,7 +21,7 @@ class Translation extends HttpApi
 {
     /**
      * Get a translation.
-     * {@link https://localise.biz/api/docs/translations/gettranslation}
+     * {@link https://localise.biz/api/docs/translations/gettranslation}.
      *
      * @param string $projectKey
      * @param string $id
@@ -49,7 +48,7 @@ class Translation extends HttpApi
 
     /**
      * Create a new translation.
-     * {@link https://localise.biz/api/docs/translations/translate}
+     * {@link https://localise.biz/api/docs/translations/translate}.
      *
      * @param string $projectKey
      * @param string $id
@@ -76,7 +75,7 @@ class Translation extends HttpApi
 
     /**
      * Delete translation
-     * {@link https://localise.biz/api/docs/translations/untranslate}
+     * {@link https://localise.biz/api/docs/translations/untranslate}.
      *
      * @param string $projectKey
      * @param string $id

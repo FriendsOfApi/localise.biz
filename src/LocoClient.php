@@ -10,9 +10,7 @@ declare(strict_types=1);
 namespace FAPI\Localise;
 
 use FAPI\Localise\Api\Asset;
-use FAPI\Localise\Api\Stat;
 use FAPI\Localise\Api\Translation;
-use FAPI\Localise\Api\Tweet;
 use FAPI\Localise\Hydrator\ModelHydrator;
 use FAPI\Localise\Hydrator\Hydrator;
 use Http\Client\HttpClient;
@@ -20,7 +18,7 @@ use Http\Client\HttpClient;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class ApiClient
+final class LocoClient
 {
     /**
      * @var HttpClient

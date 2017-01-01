@@ -13,7 +13,6 @@ use Http\Client\HttpClient;
 use Http\Client\Common\PluginClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
-use Http\Message\Authentication;
 use Http\Message\UriFactory;
 use Http\Client\Common\Plugin;
 

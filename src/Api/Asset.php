@@ -20,7 +20,7 @@ class Asset extends HttpApi
 {
     /**
      * Create an asset.
-     * {@link https://localise.biz/api/docs/assets/createasset}
+     * {@link https://localise.biz/api/docs/assets/createasset}.
      *
      * @param string $projectKey
      * @param string $id
