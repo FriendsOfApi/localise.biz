@@ -7,10 +7,11 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-namespace APIPHP\Localise\Api;
+namespace FAPI\Localise\Api;
 
-use APIPHP\Localise\Resource\Api\Asset\CreateResponse;
-use Webmozart\Assert\Assert;
+use FAPI\Localise\Resource\Api\Asset\Asset as AssetModel;
+use Psr\Http\Message\ResponseInterface;
+use FAPI\Localise\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -18,18 +19,18 @@ use Webmozart\Assert\Assert;
 class Asset extends HttpApi
 {
     /**
+     * Create an asset.
+     * {@link https://localise.biz/api/docs/assets/createasset}
+     *
      * @param string $projectKey
      * @param string $id
-     * @param string $locale
-     * @param string $translation
      *
-     * @return CreateResponse
+     * @return AssetModel|ResponseInterface
+     *
+     * @throws Exception
      */
     public function create(string $projectKey, string $id)
     {
-        Assert::notEmpty($projectKey);
-        Assert::notEmpty($id);
-
         $param = [
             'name' => $id,
             'id' => $id,
@@ -38,9 +39,18 @@ class Asset extends HttpApi
         ];
 
         $response = $this->httpPost(sprintf('/api/assets?key=%s', $projectKey), $param);
+        if (!$this->hydrator) {
+            return $response;
+        }
 
-        // TODO handle non 201 responses
-        // TODO handle 409 response
-        return $this->deserializer->deserialize($response, CreateResponse::class);
+        if ($response->getStatusCode() !== 201) {
+            $this->handleErrors($response);
+        }
+
+        if ($response->getStatusCode() === 409) {
+            throw Exception\Domain\AssetConflictException::create($id);
+        }
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
     }
 }

@@ -1,34 +1,36 @@
-<?PHP
+<?php
+
+declare(strict_types=1);
 
 /*
- *
- *
  * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
+ * of the MIT license. See the LICENSE file for details.
  */
 
-namespace APIPHP\Localise;
+namespace FAPI\Localise;
 
-use APIPHP\Localise\Api\Asset;
-use APIPHP\Localise\Api\Translation;
-use Http\Client\Common\HttpMethodsClient;
-use APIPHP\Localise\Deserializer\ModelDeserializer;
-use APIPHP\Localise\Deserializer\ResponseDeserializer;
+use FAPI\Localise\Api\Asset;
+use FAPI\Localise\Api\Stat;
+use FAPI\Localise\Api\Translation;
+use FAPI\Localise\Api\Tweet;
+use FAPI\Localise\Hydrator\ModelHydrator;
+use FAPI\Localise\Hydrator\Hydrator;
+use Http\Client\HttpClient;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class LocoClient
+final class ApiClient
 {
     /**
-     * @var HttpMethodsClient
+     * @var HttpClient
      */
     private $httpClient;
 
     /**
-     * @var ResponseDeserializer
+     * @var Hydrator
      */
-    private $deserializer;
+    private $hydrator;
 
     /**
      * @var RequestBuilder
@@ -36,19 +38,50 @@ class LocoClient
     private $requestBuilder;
 
     /**
-     * @param ResponseDeserializer|null   $deserializer
-     * @param HttpClientConfigurator|null $clientConfigurator
-     * @param RequestBuilder|null         $requestBuilder
+     * The constructor accepts already configured HTTP clients.
+     * Use the configure method to pass a configuration to the Client and create an HTTP Client.
+     *
+     * @param HttpClient          $httpClient
+     * @param Hydrator|null       $hydrator
+     * @param RequestBuilder|null $requestBuilder
      */
     public function __construct(
-        ResponseDeserializer $deserializer = null,
-        HttpClientConfigurator $clientConfigurator = null,
+        HttpClient $httpClient,
+        Hydrator $hydrator = null,
         RequestBuilder $requestBuilder = null
     ) {
-        $clientConfigurator = $clientConfigurator ?: new HttpClientConfigurator();
-        $this->httpClient = $clientConfigurator->createConfiguredClient();
+        $this->httpClient = $httpClient;
+        $this->hydrator = $hydrator ?: new ModelHydrator();
         $this->requestBuilder = $requestBuilder ?: new RequestBuilder();
-        $this->deserializer = $deserializer ?: new ModelDeserializer();
+    }
+
+    /**
+     * @param HttpClientConfigurator $httpClientConfigurator
+     * @param Hydrator|null          $hydrator
+     * @param RequestBuilder|null    $requestBuilder
+     *
+     * @return ApiClient
+     */
+    public static function configure(
+        HttpClientConfigurator $httpClientConfigurator,
+        Hydrator $hydrator = null,
+        RequestBuilder $requestBuilder = null
+    ): self {
+        $httpClient = $httpClientConfigurator->createConfiguredClient();
+
+        return new self($httpClient, $hydrator, $requestBuilder);
+    }
+
+    /**
+     * @param string $apiKey
+     *
+     * @return ApiClient
+     */
+    public static function create(string $apiKey): ApiClient
+    {
+        $httpClientConfigurator = (new HttpClientConfigurator())->setApiKey($apiKey);
+
+        return self::configure($httpClientConfigurator);
     }
 
     /**
@@ -56,7 +89,7 @@ class LocoClient
      */
     public function translations(): Translation
     {
-        return new Api\Translation($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Translation($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
 
     /**
@@ -64,6 +97,6 @@ class LocoClient
      */
     public function asset(): Asset
     {
-        return new Api\Asset($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Asset($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
 }

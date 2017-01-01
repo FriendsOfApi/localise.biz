@@ -1,8 +1,13 @@
 <?php
 
-namespace APIPHP\Localise\Resource\Api\Translation;
+namespace FAPI\Localise\Resource\Api\Translation;
 
-trait Translation
+use FAPI\Localise\Model\CreatableFromArray;
+
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
+class Translation implements CreatableFromArray
 {
     /**
      * @var string
@@ -76,9 +81,9 @@ trait Translation
     /**
      * @param array $data
      *
-     * @return self
+     * @return Translation
      */
-    public static function create(array $data)
+    public static function createFromArray(array $data)
     {
         $self = new self();
 

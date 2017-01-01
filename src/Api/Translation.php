@@ -7,12 +7,13 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-namespace APIPHP\Localise\Api;
+namespace FAPI\Localise\Api;
 
-use APIPHP\Localise\Resource\Api\Translation\CreateResponse;
-use APIPHP\Localise\Resource\Api\Translation\DeleteResponse;
-use APIPHP\Localise\Resource\Api\Translation\ShowResponse;
-use Webmozart\Assert\Assert;
+use FAPI\Localise\Resource\Api\Translation\TranslationDeleted;
+use FAPI\Localise\Resource\Api\Translation\Translation as TranslationModel;
+use Psr\Http\Message\ResponseInterface;
+use FAPI\Localise\Exception;
+
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -20,60 +21,82 @@ use Webmozart\Assert\Assert;
 class Translation extends HttpApi
 {
     /**
+     * Get a translation.
+     * {@link https://localise.biz/api/docs/translations/gettranslation}
+     *
      * @param string $projectKey
      * @param string $id
      * @param string $locale
      *
-     * @return ShowResponse
+     * @return TranslationModel|ResponseInterface
+     *
+     * @throws Exception
      */
-    public function show(string $projectKey, string $id, string $locale)
+    public function get(string $projectKey, string $id, string $locale)
     {
-        Assert::notEmpty($projectKey);
-        Assert::notEmpty($id);
-        Assert::notEmpty($locale);
-
         $response = $this->httpGet(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
 
-        // TODO handle non 200 responses
-        return $this->deserializer->deserialize($response, ShowResponse::class);
+        if (!$this->hydrator) {
+            return $response;
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, TranslationModel::class);
     }
 
     /**
+     * Create a new translation.
+     * {@link https://localise.biz/api/docs/translations/translate}
+     *
      * @param string $projectKey
      * @param string $id
      * @param string $locale
      * @param string $translation
      *
-     * @return CreateResponse
+     * @return TranslationModel|ResponseInterface
+     *
+     * @throws Exception
      */
     public function create(string $projectKey, string $id, string $locale, string $translation)
     {
-        Assert::notEmpty($projectKey);
-        Assert::notEmpty($id);
-        Assert::notEmpty($locale);
-
         $response = $this->httpPostRaw(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey), $translation);
+        if (!$this->hydrator) {
+            return $response;
+        }
 
-        // TODO handle non 200 responses
-        return $this->deserializer->deserialize($response, CreateResponse::class);
+        if ($response->getStatusCode() !== 201) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, TranslationModel::class);
     }
 
     /**
+     * Delete translation
+     * {@link https://localise.biz/api/docs/translations/untranslate}
+     *
      * @param string $projectKey
      * @param string $id
      * @param string $locale
      *
-     * @return DeleteResponse
+     * @return TranslationDeleted|ResponseInterface
+     *
+     * @throws Exception
      */
     public function delete(string $projectKey, string $id, string $locale)
     {
-        Assert::notEmpty($projectKey);
-        Assert::notEmpty($id);
-        Assert::notEmpty($locale);
-
         $response = $this->httpDelete(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
+        if (!$this->hydrator) {
+            return $response;
+        }
 
-        // TODO handle non 200 responses
-        return $this->deserializer->deserialize($response, DeleteResponse::class);
+        if ($response->getStatusCode() !== 200) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, TranslationDeleted::class);
     }
 }

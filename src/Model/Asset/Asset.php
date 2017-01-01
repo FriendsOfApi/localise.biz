@@ -1,13 +1,13 @@
 <?php
 
-namespace APIPHP\Localise\Resource\Api\Asset;
+namespace FAPI\Localise\Resource\Api\Asset;
 
-use APIPHP\Localise\Resource\ApiResponse;
+use FAPI\Localise\Model\CreatableFromArray;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class CreateResponse implements ApiResponse
+class Asset implements CreatableFromArray
 {
     /**
      * @var string
@@ -64,9 +64,9 @@ class CreateResponse implements ApiResponse
     /**
      * @param array $data
      *
-     * @return self
+     * @return Asset
      */
-    public static function create(array $data)
+    public static function createFromArray(array $data)
     {
         $self = new self();
 

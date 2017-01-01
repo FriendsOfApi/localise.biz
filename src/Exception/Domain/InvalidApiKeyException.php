@@ -5,13 +5,15 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-namespace FAPI\Localise;
+namespace FAPI\Localise\Exception\Domain;
+
+use FAPI\Localise\Exception\DomainException;
 
 /**
- * All our exception implements this interface.
+ *
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-interface Exception
+final class InvalidApiKeyException extends \Exception implements DomainException
 {
 }

@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- *
- *
  * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
+ * of the MIT license. See the LICENSE file for details.
  */
 
-namespace APIPHP\Localise;
+namespace FAPI\Localise;
 
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
@@ -16,6 +16,8 @@ use Psr\Http\Message\RequestInterface;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ *
+ * @internal This class should not be used outside of the API Client, it is not part of the BC promise.
  */
 final class RequestBuilder
 {
@@ -28,6 +30,18 @@ final class RequestBuilder
      * @var MultipartStreamBuilder
      */
     private $multipartStreamBuilder;
+
+    /**
+     * @param RequestFactory         $requestFactory
+     * @param MultipartStreamBuilder $multipartStreamBuilder
+     */
+    public function __construct(
+        RequestFactory $requestFactory = null,
+        MultipartStreamBuilder $multipartStreamBuilder = null
+    ) {
+        $this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
+        $this->multipartStreamBuilder = $multipartStreamBuilder ?: new MultipartStreamBuilder();
+    }
 
     /**
      * Creates a new PSR-7 request.
@@ -46,75 +60,27 @@ final class RequestBuilder
      *
      * @return RequestInterface
      */
-    public function create($method, $uri, array $headers = [], $body = null): RequestInterface
+    public function create(string $method, string $uri, array $headers = [], $body = null): RequestInterface
     {
         if (!is_array($body)) {
-            return $this->getRequestFactory()->createRequest($method, $uri, $headers, $body);
+            return $this->requestFactory->createRequest($method, $uri, $headers, $body);
         }
 
-        $builder = $this->getMultipartStreamBuilder();
         foreach ($body as $item) {
             $name = $item['name'];
             $content = $item['content'];
             unset($item['name']);
             unset($item['content']);
 
-            $builder->addResource($name, $content, $item);
+            $this->multipartStreamBuilder->addResource($name, $content, $item);
         }
 
-        $multipartStream = $builder->build();
-        $boundary = $builder->getBoundary();
+        $multipartStream = $this->multipartStreamBuilder->build();
+        $boundary = $this->multipartStreamBuilder->getBoundary();
 
         $headers['Content-Type'] = 'multipart/form-data; boundary='.$boundary;
+        $this->multipartStreamBuilder->reset();
 
-        return $this->getRequestFactory()->createRequest($method, $uri, $headers, $multipartStream);
-    }
-
-    /**
-     * @return RequestFactory
-     */
-    private function getRequestFactory(): RequestFactory
-    {
-        if ($this->requestFactory === null) {
-            $this->requestFactory = MessageFactoryDiscovery::find();
-        }
-
-        return $this->requestFactory;
-    }
-
-    /**
-     * @param RequestFactory $requestFactory
-     *
-     * @return RequestBuilder
-     */
-    public function setRequestFactory(RequestFactory $requestFactory)
-    {
-        $this->requestFactory = $requestFactory;
-
-        return $this;
-    }
-
-    /**
-     * @return MultipartStreamBuilder
-     */
-    private function getMultipartStreamBuilder(): MultipartStreamBuilder
-    {
-        if ($this->multipartStreamBuilder === null) {
-            $this->multipartStreamBuilder = new MultipartStreamBuilder();
-        }
-
-        return $this->multipartStreamBuilder;
-    }
-
-    /**
-     * @param MultipartStreamBuilder $multipartStreamBuilder
-     *
-     * @return RequestBuilder
-     */
-    public function setMultipartStreamBuilder(MultipartStreamBuilder $multipartStreamBuilder)
-    {
-        $this->multipartStreamBuilder = $multipartStreamBuilder;
-
-        return $this;
+        return $this->requestFactory->createRequest($method, $uri, $headers, $multipartStream);
     }
 }

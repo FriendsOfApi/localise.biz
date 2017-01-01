@@ -1,25 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- *
- *
  * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
+ * of the MIT license. See the LICENSE file for details.
  */
 
-namespace APIPHP\Localise;
+namespace FAPI\Localise;
 
 use Http\Client\HttpClient;
 use Http\Client\Common\PluginClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
+use Http\Message\Authentication;
 use Http\Message\UriFactory;
 use Http\Client\Common\Plugin;
 
 /**
- * Configure a HTTP client.
+ * Configure an HTTP client.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ *
+ * @internal This class should not be used outside of the API Client, it is not part of the BC promise.
  */
 final class HttpClientConfigurator
 {
@@ -39,26 +42,38 @@ final class HttpClientConfigurator
     private $httpClient;
 
     /**
-     * @return PluginClient
+     * @var Plugin[]
      */
-    public function createConfiguredClient()
-    {
-        $plugins = [
-            new Plugin\AddHostPlugin($this->getUriFactory()->createUri($this->getEndpoint())),
-            new Plugin\HeaderDefaultsPlugin([
-                'User-Agent' => 'api-php/localise.biz (https://github.com/api-php/localise.biz)',
-            ]),
-        ];
+    private $prependPlugins = [];
 
-        return new PluginClient($this->getHttpClient(), $plugins);
+    /**
+     * @var Plugin[]
+     */
+    private $appendPlugins = [];
+
+    /**
+     * @param HttpClient|null $httpClient
+     * @param UriFactory|null $uriFactory
+     */
+    public function __construct(HttpClient $httpClient = null, UriFactory $uriFactory = null)
+    {
+        $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
+        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
     }
 
     /**
-     * @return string
+     * @return HttpClient
      */
-    private function getEndpoint(): string
+    public function createConfiguredClient(): HttpClient
     {
-        return $this->endpoint;
+        $plugins = $this->prependPlugins;
+
+        $plugins[] = new Plugin\AddHostPlugin($this->uriFactory->createUri($this->endpoint));
+        $plugins[] = new Plugin\HeaderDefaultsPlugin([
+            'User-Agent' => 'api-php/Localise (https://github.com/api-php/Localise)',
+        ]);
+
+        return new PluginClient($this->httpClient, array_merge($plugins, $this->appendPlugins));
     }
 
     /**
@@ -66,7 +81,7 @@ final class HttpClientConfigurator
      *
      * @return HttpClientConfigurator
      */
-    public function setEndpoint(string $endpoint)
+    public function setEndpoint(string $endpoint): HttpClientConfigurator
     {
         $this->endpoint = $endpoint;
 
@@ -74,49 +89,30 @@ final class HttpClientConfigurator
     }
 
     /**
-     * @return UriFactory
-     */
-    private function getUriFactory(): UriFactory
-    {
-        if ($this->uriFactory === null) {
-            $this->uriFactory = UriFactoryDiscovery::find();
-        }
-
-        return $this->uriFactory;
-    }
-
-    /**
-     * @param UriFactory $uriFactory
+     * @param Plugin $plugin
      *
      * @return HttpClientConfigurator
      */
-    public function setUriFactory(UriFactory $uriFactory)
+    public function appendPlugin(Plugin ...$plugin): HttpClientConfigurator
     {
-        $this->uriFactory = $uriFactory;
+        foreach ($plugin as $p) {
+            $this->appendPlugins[] = $p;
+        }
 
         return $this;
     }
 
     /**
-     * @return HttpClient
-     */
-    private function getHttpClient(): HttpClient
-    {
-        if ($this->httpClient === null) {
-            $this->httpClient = HttpClientDiscovery::find();
-        }
-
-        return $this->httpClient;
-    }
-
-    /**
-     * @param HttpClient $httpClient
+     * @param Plugin $plugin
      *
      * @return HttpClientConfigurator
      */
-    public function setHttpClient(HttpClient $httpClient)
+    public function prependPlugin(Plugin ...$plugin): HttpClientConfigurator
     {
-        $this->httpClient = $httpClient;
+        $plugin = array_reverse($plugin);
+        foreach ($plugin as $p) {
+            array_unshift($this->prependPlugins, $p);
+        }
 
         return $this;
     }
