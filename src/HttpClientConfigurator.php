@@ -69,7 +69,7 @@ final class HttpClientConfigurator
 
         $plugins[] = new Plugin\AddHostPlugin($this->uriFactory->createUri($this->endpoint));
         $plugins[] = new Plugin\HeaderDefaultsPlugin([
-            'User-Agent' => 'api-php/Localise (https://github.com/api-php/Localise)',
+            'User-Agent' => 'FriendsOfApi/Localise (https://github.com/FriendsOfApi/Localise)',
         ]);
 
         return new PluginClient($this->httpClient, array_merge($plugins, $this->appendPlugins));

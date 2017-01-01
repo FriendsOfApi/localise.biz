@@ -1,10 +1,10 @@
 # Localise.biz (Logo) API client
 
-[![Latest Version](https://img.shields.io/github/release/api-php/localise.biz.svg?style=flat-square)](https://github.com/api-php/localise.biz/releases)
-[![Build Status](https://img.shields.io/travis/api-php/localise.biz.svg?style=flat-square)](https://travis-ci.org/api-php/localise.biz)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/api-php/localise.biz.svg?style=flat-square)](https://scrutinizer-ci.com/g/api-php/localise.biz)
-[![Quality Score](https://img.shields.io/scrutinizer/g/api-php/localise.biz.svg?style=flat-square)](https://scrutinizer-ci.com/g/api-php/localise.biz)
-[![Total Downloads](https://img.shields.io/packagist/dt/api-php/localise.biz.svg?style=flat-square)](https://packagist.org/packages/api-php/localise.biz)
+[![Latest Version](https://img.shields.io/github/release/FriendsOfApi/localise.biz.svg?style=flat-square)](https://github.com/FriendsOfApi/localise.biz/releases)
+[![Build Status](https://img.shields.io/travis/FriendsOfApi/localise.biz.svg?style=flat-square)](https://travis-ci.org/FriendsOfApi/localise.biz)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/FriendsOfApi/localise.biz.svg?style=flat-square)](https://scrutinizer-ci.com/g/FriendsOfApi/localise.biz)
+[![Quality Score](https://img.shields.io/scrutinizer/g/FriendsOfApi/localise.biz.svg?style=flat-square)](https://scrutinizer-ci.com/g/FriendsOfApi/localise.biz)
+[![Total Downloads](https://img.shields.io/packagist/dt/friendsofapi/localise.biz.svg?style=flat-square)](https://packagist.org/packages/FriendsOfApi/localise.biz)
 
 
 A community client for [Loco](https://localise.biz) (Localise.biz). The official plugin is found [here](https://github.com/loco/loco-php-sdk).
@@ -14,7 +14,7 @@ A community client for [Loco](https://localise.biz) (Localise.biz). The official
 Via Composer
 
 ``` bash
-$ composer require api-php/localise.biz
+$ composer require friendsofapi/localise.biz
 ```
 
 ## Usage
