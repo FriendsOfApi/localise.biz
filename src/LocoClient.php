@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace FAPI\Localise;
 
-use FAPI\Localise\Api\Asset;
-use FAPI\Localise\Api\Translation;
 use FAPI\Localise\Hydrator\ModelHydrator;
 use FAPI\Localise\Hydrator\Hydrator;
 use Http\Client\HttpClient;
@@ -73,7 +71,7 @@ final class LocoClient
     /**
      * @return Api\Translation
      */
-    public function translations(): Translation
+    public function translations(): Api\Translation
     {
         return new Api\Translation($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
@@ -81,7 +79,7 @@ final class LocoClient
     /**
      * @return Api\Asset
      */
-    public function asset(): Asset
+    public function asset(): Api\Asset
     {
         return new Api\Asset($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
@@ -89,7 +87,7 @@ final class LocoClient
     /**
      * @return Api\Import
      */
-    public function import(): Import
+    public function import(): Api\Import
     {
         return new Api\Import($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
@@ -97,7 +95,7 @@ final class LocoClient
     /**
      * @return Api\Export
      */
-    public function export(): Export
+    public function export(): Api\Export
     {
         return new Api\Export($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
