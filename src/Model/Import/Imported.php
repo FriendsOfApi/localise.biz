@@ -19,7 +19,6 @@ class Imported implements CreatableFromArray
      */
     private $locales;
 
-
     private function __construct()
     {
     }
