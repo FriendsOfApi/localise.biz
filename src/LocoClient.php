@@ -85,4 +85,20 @@ final class LocoClient
     {
         return new Api\Asset($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
+
+    /**
+     * @return Api\Import
+     */
+    public function import(): Import
+    {
+        return new Api\Import($this->httpClient, $this->hydrator, $this->requestBuilder);
+    }
+
+    /**
+     * @return Api\Export
+     */
+    public function export(): Export
+    {
+        return new Api\Export($this->httpClient, $this->hydrator, $this->requestBuilder);
+    }
 }
