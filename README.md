@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/friendsofapi/localise.biz.svg?style=flat-square)](https://packagist.org/packages/FriendsOfApi/localise.biz)
 
 
-A community client for [Loco](https://localise.biz) (Localise.biz). The official plugin is found [here](https://github.com/loco/loco-php-sdk).
+A community client for [Loco](https://localise.biz) (Localise.biz). The official api client is found [here](https://github.com/loco/loco-php-sdk).
 
 ## Install
 
