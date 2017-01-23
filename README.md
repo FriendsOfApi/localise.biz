@@ -1,4 +1,4 @@
-# Localise.biz (Logo) API client
+# Localise.biz (Loco) API client
 
 [![Latest Version](https://img.shields.io/github/release/FriendsOfApi/localise.biz.svg?style=flat-square)](https://github.com/FriendsOfApi/localise.biz/releases)
 [![Build Status](https://img.shields.io/travis/FriendsOfApi/localise.biz.svg?style=flat-square)](https://travis-ci.org/FriendsOfApi/localise.biz)
