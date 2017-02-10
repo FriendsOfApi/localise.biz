@@ -9,8 +9,8 @@
 
 namespace FAPI\Localise\Api;
 
-use FAPI\Localise\Resource\Api\Translation\TranslationDeleted;
-use FAPI\Localise\Resource\Api\Translation\Translation as TranslationModel;
+use FAPI\Localise\Model\Translation\TranslationDeleted;
+use FAPI\Localise\Model\Translation\Translation as TranslationModel;
 use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
 

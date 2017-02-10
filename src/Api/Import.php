@@ -9,7 +9,7 @@
 
 namespace FAPI\Localise\Api;
 
-use FAPI\Localise\Resource\Api\Import\Imported;
+use FAPI\Localise\Model\Import\Imported;
 use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
 
