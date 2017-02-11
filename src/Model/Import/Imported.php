@@ -1,6 +1,6 @@
 <?php
 
-namespace FAPI\Localise\Resource\Api\Import;
+namespace FAPI\Localise\Model\Import;
 
 use FAPI\Localise\Model\CreatableFromArray;
 

@@ -9,7 +9,7 @@
 
 namespace FAPI\Localise\Api;
 
-use FAPI\Localise\Resource\Api\Asset\Asset as AssetModel;
+use FAPI\Localise\Model\Asset\Asset as AssetModel;
 use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
 

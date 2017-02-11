@@ -1,6 +1,6 @@
 <?php
 
-namespace FAPI\Localise\Resource\Api\Translation;
+namespace FAPI\Localise\Model\Translation;
 
 use FAPI\Localise\Model\CreatableFromArray;
 
