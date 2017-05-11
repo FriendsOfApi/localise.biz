@@ -66,7 +66,7 @@ class Translation extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() !== 201) {
+        if ($response->getStatusCode() >= 400) {
             $this->handleErrors($response);
         }
 
