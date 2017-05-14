@@ -53,4 +53,54 @@ class Asset extends HttpApi
 
         return $this->hydrator->hydrate($response, AssetModel::class);
     }
+
+    /**
+     * Patch an asset.
+     * {@link https://localise.biz/api/docs/assets/patchasset}.
+     *
+     * @param string $projectKey
+     * @param string $id
+     * @param string $type
+     * @param string $name
+     * @param string $context
+     * @param string $notes
+     *
+     * @return AssetModel|ResponseInterface
+     *
+     * @throws Exception
+     */
+    public function patch(string $projectKey, string $id, $type = null, $name = null, $context = null, $notes = null)
+    {
+        $param = [
+            'id' => $id,
+        ];
+
+        if ($type) {
+            $param['type'] = $type;
+        }
+        if ($name) {
+            $param['name'] = $name;
+        }
+        if ($context) {
+            $param['context'] = $context;
+        }
+        if ($notes) {
+            $param['notes'] = $notes;
+        }
+
+        $response = $this->httpPatch(sprintf('/api/assets/%s.json?key=%s', $id, $projectKey), $param);
+        if (!$this->hydrator) {
+            return $response;
+        }
+
+        if ($response->getStatusCode() === 409) {
+            throw Exception\Domain\AssetConflictException::create($id);
+        }
+
+        if ($response->getStatusCode() >= 400) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
+    }
 }
