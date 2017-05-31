@@ -2,11 +2,15 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
-## Unreleased
+## 0.2.3
 
 ### Added
 
 - New Assert Patch method, from https://localise.biz/api/docs/assets/patchasset
+
+### Changed
+
+- Using stable version of MultipartStreamBuilder.
 
 ## 0.2.2
 
