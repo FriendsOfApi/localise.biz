@@ -122,6 +122,24 @@ abstract class HttpApi
     }
 
     /**
+     * Send a PATCH request with JSON-encoded parameters.
+     *
+     * @param string $path           Request path
+     * @param array  $params         PATCH parameters to be JSON encoded
+     * @param array  $requestHeaders Request headers
+     *
+     * @return ResponseInterface
+     */
+    protected function httpPatch(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
+    {
+        $requestHeaders['Content-Type'] = 'application/json';
+
+        return $this->httpClient->sendRequest(
+            $this->requestBuilder->create('PATCH', $path, $requestHeaders, json_encode($params))
+        );
+    }
+
+    /**
      * Send a DELETE request with JSON-encoded parameters.
      *
      * @param string $path           Request path
