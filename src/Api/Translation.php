@@ -33,7 +33,7 @@ class Translation extends HttpApi
      */
     public function get(string $projectKey, string $id, string $locale)
     {
-        $response = $this->httpGet(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
+        $response = $this->httpGet(sprintf('/api/translations/%s/%s?key=%s', rawurlencode($id), $locale, $projectKey));
 
         if (!$this->hydrator) {
             return $response;
@@ -61,7 +61,7 @@ class Translation extends HttpApi
      */
     public function create(string $projectKey, string $id, string $locale, string $translation)
     {
-        $response = $this->httpPostRaw(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey), $translation);
+        $response = $this->httpPostRaw(sprintf('/api/translations/%s/%s?key=%s', rawurlencode($id), $locale, $projectKey), $translation);
         if (!$this->hydrator) {
             return $response;
         }
@@ -87,7 +87,7 @@ class Translation extends HttpApi
      */
     public function delete(string $projectKey, string $id, string $locale)
     {
-        $response = $this->httpDelete(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey));
+        $response = $this->httpDelete(sprintf('/api/translations/%s/%s?key=%s', rawurlencode($id), $locale, $projectKey));
         if (!$this->hydrator) {
             return $response;
         }
