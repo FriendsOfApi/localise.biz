@@ -59,7 +59,7 @@ class Translation extends HttpApi
      *
      * @throws Exception
      */
-    public function create(string $projectKey, string $id, string $locale, string $translation)
+    public function create(string $projectKey, string $id, string $locale, string $translation = null)
     {
         $response = $this->httpPostRaw(sprintf('/api/translations/%s/%s?key=%s', $id, $locale, $projectKey), $translation);
         if (!$this->hydrator) {
