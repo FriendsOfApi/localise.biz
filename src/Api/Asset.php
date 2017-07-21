@@ -43,12 +43,12 @@ class Asset extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() !== 201) {
-            $this->handleErrors($response);
-        }
-
         if ($response->getStatusCode() === 409) {
             throw Exception\Domain\AssetConflictException::create($id);
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            $this->handleErrors($response);
         }
 
         return $this->hydrator->hydrate($response, AssetModel::class);
