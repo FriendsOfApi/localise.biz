@@ -55,6 +55,36 @@ class Asset extends HttpApi
     }
 
     /**
+     * Tag an asset.
+     * {@link https://localise.biz/api/docs/assets/tagasset}.
+     *
+     * @param string $projectKey
+     * @param string $id
+     * @param string $tag
+     *
+     * @return AssetModel|ResponseInterface
+     *
+     * @throws Exception\DomainException
+     */
+    public function tag(string $projectKey, string $id, string $tag)
+    {
+        $param = [
+            'name' => $tag
+        ];
+
+        $response = $this->httpPost(sprintf('/api/assets/%s/tags?key=%s', $id, $projectKey), $param);
+        if (!$this->hydrator) {
+            return $response;
+        }
+
+        if ($response->getStatusCode() >= 400) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
+    /**
      * Patch an asset.
      * {@link https://localise.biz/api/docs/assets/patchasset}.
      *
