@@ -18,30 +18,37 @@ class Asset implements CreatableFromArray
      * @var string
      */
     private $type;
+
     /**
      * @var string
      */
     private $name;
+
     /**
      * @var string
      */
     private $context;
+
     /**
      * @var string
      */
     private $notes;
+
     /**
      * @var string
      */
     private $modified;
+
     /**
      * @var int
      */
     private $translated;
+
     /**
      * @var int
      */
     private $untranslated;
+
     /**
      * @var int
      */

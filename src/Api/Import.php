@@ -40,7 +40,7 @@ class Import extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 201) {
+        if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
             $this->handleErrors($response);
         }
 

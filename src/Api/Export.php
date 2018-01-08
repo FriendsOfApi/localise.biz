@@ -39,7 +39,7 @@ class Export extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() !== 200) {
+        if (200 !== $response->getStatusCode()) {
             $this->handleErrors($response);
         }
 
