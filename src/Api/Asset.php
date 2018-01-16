@@ -43,11 +43,41 @@ class Asset extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() === 409) {
+        if (409 === $response->getStatusCode()) {
             throw Exception\Domain\AssetConflictException::create($id);
         }
 
-        if ($response->getStatusCode() !== 201) {
+        if (201 !== $response->getStatusCode()) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
+    /**
+     * Tag an asset.
+     * {@link https://localise.biz/api/docs/assets/tagasset}.
+     *
+     * @param string $projectKey
+     * @param string $id
+     * @param string $tag
+     *
+     * @return AssetModel|ResponseInterface
+     *
+     * @throws Exception\DomainException
+     */
+    public function tag(string $projectKey, string $id, string $tag)
+    {
+        $param = [
+            'name' => $tag,
+        ];
+
+        $response = $this->httpPost(sprintf('/api/assets/%s/tags?key=%s', $id, $projectKey), $param);
+        if (!$this->hydrator) {
+            return $response;
+        }
+
+        if ($response->getStatusCode() >= 400) {
             $this->handleErrors($response);
         }
 
@@ -93,7 +123,7 @@ class Asset extends HttpApi
             return $response;
         }
 
-        if ($response->getStatusCode() === 409) {
+        if (409 === $response->getStatusCode()) {
             throw Exception\Domain\AssetConflictException::create($id);
         }
 

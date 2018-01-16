@@ -10,6 +10,7 @@ use FAPI\Localise\Model\CreatableFromArray;
 class TranslationDeleted implements CreatableFromArray
 {
     private $status;
+
     private $message;
 
     /**
