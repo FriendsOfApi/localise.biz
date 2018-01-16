@@ -2,6 +2,17 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 0.2.4
+
+### Added
+
+- Added support for tagging assets. 
+
+### Fixed
+
+- Properly support keys containing spaces.
+- Better exception on clonflicts.
+
 ## 0.2.3
 
 ### Added
