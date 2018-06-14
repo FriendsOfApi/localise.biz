@@ -56,7 +56,7 @@ final class LocoClient
      * @param Hydrator|null          $hydrator
      * @param RequestBuilder|null    $requestBuilder
      *
-     * @return ApiClient
+     * @return LocoClient
      */
     public static function configure(
         HttpClientConfigurator $httpClientConfigurator,
