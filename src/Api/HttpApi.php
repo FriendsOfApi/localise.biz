@@ -179,17 +179,12 @@ abstract class HttpApi
         switch ($response->getStatusCode()) {
             case 401:
                 throw new DomainExceptions\InvalidApiKeyException($message);
-                break;
             case 403:
                 throw new DomainExceptions\InsufficientPrivilegesException($message);
-                break;
             case 404:
                 throw new DomainExceptions\NotFoundException($message);
-                break;
-
             default:
                 throw new DomainExceptions\UnknownErrorException($message);
-                break;
         }
     }
 }
