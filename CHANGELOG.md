@@ -2,6 +2,16 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 1.1.0
+
+### Added
+
+- Support for PHP 8
+
+### Removed
+
+- Support for PHP 7.1
+
 ## 1.0.1
 
 ### Added
@@ -16,7 +26,7 @@ No changes since 0.2.4
 
 ### Added
 
-- Added support for tagging assets. 
+- Added support for tagging assets.
 
 ### Fixed
 

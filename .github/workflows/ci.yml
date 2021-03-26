@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Test
+    runs-on: Ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '7.2', '7.3', '7.4', '8.0' ]
+        strategy: [ 'highest' ]
+        include:
+            - php: 7.4
+              strategy: 'lowest'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Download dependencies
+        uses: ramsey/composer-install@v1
+        with:
+          dependency-versions: ${{ matrix.strategy }}
+          composer-options: --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Run tests
+        run: ./vendor/bin/phpunit
+
