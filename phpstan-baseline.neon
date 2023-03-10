@@ -40,38 +40,3 @@ parameters:
 			count: 1
 			path: src/Model/Translation/Translation.php
 
-		-
-			message: "#^Property FAPI\\\\Localise\\\\RequestBuilder\\:\\:\\$multipartStreamBuilder has unknown class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder as its type\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Parameter \\$multipartStreamBuilder of method FAPI\\\\Localise\\\\RequestBuilder\\:\\:__construct\\(\\) has invalid typehint type Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder\\.$#"
-			count: 2
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Instantiated class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder not found\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Call to method addResource\\(\\) on an unknown class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Call to method build\\(\\) on an unknown class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Call to method getBoundary\\(\\) on an unknown class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
-		-
-			message: "#^Call to method reset\\(\\) on an unknown class Http\\\\Message\\\\MultipartStream\\\\MultipartStreamBuilder\\.$#"
-			count: 1
-			path: src/RequestBuilder.php
-
