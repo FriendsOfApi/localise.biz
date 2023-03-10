@@ -37,6 +37,11 @@ class Asset implements CreatableFromArray
     /**
      * @var string
      */
+    private $printf;
+
+    /**
+     * @var string
+     */
     private $modified;
 
     /**
@@ -109,6 +114,9 @@ class Asset implements CreatableFromArray
         }
         if (isset($data['tags'])) {
             $self->setTags($data['tags']);
+        }
+        if (isset($data['printf'])) {
+            $self->setPrintf($data['printf']);
         }
 
         return $self;
@@ -192,6 +200,16 @@ class Asset implements CreatableFromArray
     private function setNotes($notes)
     {
         $this->notes = $notes;
+    }
+
+    public function getPrintf(): string
+    {
+        return $this->printf;
+    }
+
+    public function setPrintf(string $printf): void
+    {
+        $this->printf = $printf;
     }
 
     /**

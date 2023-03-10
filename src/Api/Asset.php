@@ -10,6 +10,7 @@
 namespace FAPI\Localise\Api;
 
 use FAPI\Localise\Model\Asset\Asset as AssetModel;
+use FAPI\Localise\Model\Asset\TagDeleted;
 use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
 
@@ -18,6 +19,22 @@ use FAPI\Localise\Exception;
  */
 class Asset extends HttpApi
 {
+    /**
+     * Get an asset.
+     * {@link https://localise.biz/api/docs/assets/getasset}.
+     *
+     * @param string $projectKey
+     * @param string $id
+     *
+     * @return AssetModel
+     */
+    public function get(string $projectKey, string $id): AssetModel
+    {
+        $response = $this->httpGet(sprintf('/api/assets/%s.json?key=%s', $id, $projectKey));
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
     /**
      * Create an asset.
      * {@link https://localise.biz/api/docs/assets/createasset}.
@@ -132,5 +149,22 @@ class Asset extends HttpApi
         }
 
         return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
+    /**
+     * Delete a tag.
+     * {@link https://localise.biz/api/docs/assets/untagasset}.
+     *
+     * @param string $projectKey
+     * @param string $assetId
+     * @param string $tag
+     *
+     * @return TagDeleted
+     */
+    public function deleteTag(string $projectKey, string $assetId, string $tag): TagDeleted
+    {
+        $response = $this->httpDelete(sprintf('/api/assets/%s/tags/%s.json?key=%s', $assetId, $tag, $projectKey));
+
+        return $this->hydrator->hydrate($response, TagDeleted::class);
     }
 }
