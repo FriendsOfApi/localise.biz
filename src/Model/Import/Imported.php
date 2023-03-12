@@ -24,8 +24,6 @@ class Imported implements CreatableFromArray
     }
 
     /**
-     * @param array $data
-     *
      * @return Imported
      */
     public static function createFromArray(array $data)
@@ -42,9 +40,6 @@ class Imported implements CreatableFromArray
         return $self;
     }
 
-    /**
-     * @return array
-     */
     public function getAssets(): array
     {
         return $this->assets;
@@ -58,9 +53,6 @@ class Imported implements CreatableFromArray
         $this->assets = $assets;
     }
 
-    /**
-     * @return array
-     */
     public function getLocales(): array
     {
         return $this->locales;

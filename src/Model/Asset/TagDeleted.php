@@ -13,10 +13,6 @@ class TagDeleted implements CreatableFromArray
 
     private $message;
 
-    /**
-     * @param int    $status
-     * @param string $message
-     */
     private function __construct(int $status, string $message)
     {
         $this->status = $status;
@@ -24,8 +20,6 @@ class TagDeleted implements CreatableFromArray
     }
 
     /**
-     * @param array $data
-     *
      * @return TagDeleted
      */
     public static function createFromArray(array $data)
@@ -44,17 +38,11 @@ class TagDeleted implements CreatableFromArray
         return new self($status, $message);
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return int
-     */
     public function getStatus(): int
     {
         return $this->status;

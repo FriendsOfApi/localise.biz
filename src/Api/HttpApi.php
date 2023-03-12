@@ -11,10 +11,10 @@ namespace FAPI\Localise\Api;
 
 use FAPI\Localise\Exception\Domain as DomainExceptions;
 use FAPI\Localise\Exception\DomainException;
-use FAPI\Localise\Hydrator\NoopHydrator;
-use Http\Client\HttpClient;
 use FAPI\Localise\Hydrator\Hydrator;
+use FAPI\Localise\Hydrator\NoopHydrator;
 use FAPI\Localise\RequestBuilder;
+use Http\Client\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -37,11 +37,6 @@ abstract class HttpApi
      */
     protected $requestBuilder;
 
-    /**
-     * @param HttpClient     $httpClient
-     * @param RequestBuilder $requestBuilder
-     * @param Hydrator       $hydrator
-     */
     public function __construct(HttpClient $httpClient, Hydrator $hydrator, RequestBuilder $requestBuilder)
     {
         $this->httpClient = $httpClient;
@@ -57,8 +52,6 @@ abstract class HttpApi
      * @param string $path           Request path
      * @param array  $params         GET parameters
      * @param array  $requestHeaders Request Headers
-     *
-     * @return ResponseInterface
      */
     protected function httpGet(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
     {
@@ -77,8 +70,6 @@ abstract class HttpApi
      * @param string $path           Request path
      * @param array  $params         POST parameters to be JSON encoded
      * @param array  $requestHeaders Request headers
-     *
-     * @return ResponseInterface
      */
     protected function httpPost(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
     {
@@ -93,8 +84,6 @@ abstract class HttpApi
      * @param string       $path           Request path
      * @param array|string $body           Request body
      * @param array        $requestHeaders Request headers
-     *
-     * @return ResponseInterface
      */
     protected function httpPostRaw(string $path, $body, array $requestHeaders = []): ResponseInterface
     {
@@ -109,8 +98,6 @@ abstract class HttpApi
      * @param string $path           Request path
      * @param array  $params         POST parameters to be JSON encoded
      * @param array  $requestHeaders Request headers
-     *
-     * @return ResponseInterface
      */
     protected function httpPut(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
     {
@@ -127,8 +114,6 @@ abstract class HttpApi
      * @param string $path           Request path
      * @param array  $params         PATCH parameters to be JSON encoded
      * @param array  $requestHeaders Request headers
-     *
-     * @return ResponseInterface
      */
     protected function httpPatch(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
     {
@@ -145,8 +130,6 @@ abstract class HttpApi
      * @param string $path           Request path
      * @param array  $params         POST parameters to be JSON encoded
      * @param array  $requestHeaders Request headers
-     *
-     * @return ResponseInterface
      */
     protected function httpDelete(string $path, array $params = [], array $requestHeaders = []): ResponseInterface
     {
@@ -161,8 +144,6 @@ abstract class HttpApi
      * Handle HTTP errors.
      *
      * Call is controlled by the specific API methods.
-     *
-     * @param ResponseInterface $response
      *
      * @throws DomainException
      */

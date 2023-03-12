@@ -79,8 +79,6 @@ class Translation implements CreatableFromArray
     }
 
     /**
-     * @param array $data
-     *
      * @return Translation
      */
     public static function createFromArray(array $data)
@@ -130,9 +128,6 @@ class Translation implements CreatableFromArray
         return $self;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -146,9 +141,6 @@ class Translation implements CreatableFromArray
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
@@ -194,9 +186,6 @@ class Translation implements CreatableFromArray
         $this->flagged = (bool) $flagged;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
@@ -210,9 +199,6 @@ class Translation implements CreatableFromArray
         $this->status = $status;
     }
 
-    /**
-     * @return string
-     */
     public function getTranslation(): string
     {
         return $this->translation;
@@ -234,33 +220,21 @@ class Translation implements CreatableFromArray
         return $this->revision;
     }
 
-    /**
-     * @param int $revision
-     */
     private function setRevision(int $revision)
     {
         $this->revision = $revision;
     }
 
-    /**
-     * @return int
-     */
     public function getComments(): int
     {
         return $this->comments;
     }
 
-    /**
-     * @param int $comments
-     */
     private function setComments(int $comments)
     {
         $this->comments = $comments;
     }
 
-    /**
-     * @return string
-     */
     public function getModified(): string
     {
         return $this->modified;
@@ -274,9 +248,6 @@ class Translation implements CreatableFromArray
         $this->modified = $modified;
     }
 
-    /**
-     * @return array
-     */
     public function getAuthor(): array
     {
         return $this->author;
@@ -290,9 +261,6 @@ class Translation implements CreatableFromArray
         $this->author = $author;
     }
 
-    /**
-     * @return array
-     */
     public function getFlagger(): array
     {
         return $this->flagger;
@@ -306,9 +274,6 @@ class Translation implements CreatableFromArray
         $this->flagger = $flagger;
     }
 
-    /**
-     * @return array
-     */
     public function getLocale(): array
     {
         return $this->locale;
@@ -322,9 +287,6 @@ class Translation implements CreatableFromArray
         $this->locale = $locale;
     }
 
-    /**
-     * @return array
-     */
     public function getPlurals(): array
     {
         return $this->plurals;

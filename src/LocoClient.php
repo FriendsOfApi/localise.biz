@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace FAPI\Localise;
 
-use FAPI\Localise\Hydrator\ModelHydrator;
 use FAPI\Localise\Hydrator\Hydrator;
+use FAPI\Localise\Hydrator\ModelHydrator;
 use Http\Client\HttpClient;
 
 /**
@@ -36,10 +36,6 @@ final class LocoClient
     /**
      * The constructor accepts already configured HTTP clients.
      * Use the configure method to pass a configuration to the Client and create an HTTP Client.
-     *
-     * @param HttpClient          $httpClient
-     * @param Hydrator|null       $hydrator
-     * @param RequestBuilder|null $requestBuilder
      */
     public function __construct(
         HttpClient $httpClient,
@@ -51,13 +47,6 @@ final class LocoClient
         $this->requestBuilder = $requestBuilder ?: new RequestBuilder();
     }
 
-    /**
-     * @param HttpClientConfigurator $httpClientConfigurator
-     * @param Hydrator|null          $hydrator
-     * @param RequestBuilder|null    $requestBuilder
-     *
-     * @return LocoClient
-     */
     public static function configure(
         HttpClientConfigurator $httpClientConfigurator,
         Hydrator $hydrator = null,
@@ -68,33 +57,21 @@ final class LocoClient
         return new self($httpClient, $hydrator, $requestBuilder);
     }
 
-    /**
-     * @return Api\Translation
-     */
     public function translations(): Api\Translation
     {
         return new Api\Translation($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
 
-    /**
-     * @return Api\Asset
-     */
     public function asset(): Api\Asset
     {
         return new Api\Asset($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
 
-    /**
-     * @return Api\Import
-     */
     public function import(): Api\Import
     {
         return new Api\Import($this->httpClient, $this->hydrator, $this->requestBuilder);
     }
 
-    /**
-     * @return Api\Export
-     */
     public function export(): Api\Export
     {
         return new Api\Export($this->httpClient, $this->hydrator, $this->requestBuilder);

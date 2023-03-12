@@ -9,10 +9,10 @@
 
 namespace FAPI\Localise\Api;
 
+use FAPI\Localise\Exception;
 use FAPI\Localise\Model\Asset\Asset as AssetModel;
 use FAPI\Localise\Model\Asset\TagDeleted;
 use Psr\Http\Message\ResponseInterface;
-use FAPI\Localise\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -22,11 +22,6 @@ class Asset extends HttpApi
     /**
      * Get an asset.
      * {@link https://localise.biz/api/docs/assets/getasset}.
-     *
-     * @param string $projectKey
-     * @param string $id
-     *
-     * @return AssetModel
      */
     public function get(string $projectKey, string $id): AssetModel
     {
@@ -38,9 +33,6 @@ class Asset extends HttpApi
     /**
      * Create an asset.
      * {@link https://localise.biz/api/docs/assets/createasset}.
-     *
-     * @param string $projectKey
-     * @param string $id
      *
      * @return AssetModel|ResponseInterface
      *
@@ -75,10 +67,6 @@ class Asset extends HttpApi
      * Tag an asset.
      * {@link https://localise.biz/api/docs/assets/tagasset}.
      *
-     * @param string $projectKey
-     * @param string $id
-     * @param string $tag
-     *
      * @return AssetModel|ResponseInterface
      *
      * @throws Exception\DomainException
@@ -105,8 +93,6 @@ class Asset extends HttpApi
      * Patch an asset.
      * {@link https://localise.biz/api/docs/assets/patchasset}.
      *
-     * @param string $projectKey
-     * @param string $id
      * @param string $type
      * @param string $name
      * @param string $context
@@ -154,12 +140,6 @@ class Asset extends HttpApi
     /**
      * Delete a tag.
      * {@link https://localise.biz/api/docs/assets/untagasset}.
-     *
-     * @param string $projectKey
-     * @param string $assetId
-     * @param string $tag
-     *
-     * @return TagDeleted
      */
     public function deleteTag(string $projectKey, string $assetId, string $tag): TagDeleted
     {
