@@ -9,9 +9,9 @@
 
 namespace FAPI\Localise\Api;
 
+use FAPI\Localise\Exception;
 use FAPI\Localise\Model\Import\Imported;
 use Psr\Http\Message\ResponseInterface;
-use FAPI\Localise\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -21,11 +21,6 @@ class Import extends HttpApi
     /**
      * Export a locale.
      * {@link https://localise.biz/api/docs/export/exportlocale}.
-     *
-     * @param string $projectKey
-     * @param string $ext
-     * @param string $body
-     * @param array  $params
      *
      * @return string|ResponseInterface
      *

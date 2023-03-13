@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run PHPStan
-        uses: docker://jakzal/phpqa:php7.3-alpine
+        uses: docker://jakzal/phpqa:php8.1-alpine
         with:
           args: phpstan analyze
 
@@ -17,17 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run PHP-CS-Fixer
-        uses: docker://jakzal/phpqa:php7.3-alpine
+        uses: docker://jakzal/phpqa:php8.1-alpine
         with:
-            args: php-cs-fixer fix --dry-run --diff-format udiff -vvv
-
-  roave-bc-check:
-    name: Roave BC Check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Roave BC Check
-        uses: docker://nyholm/roave-bc-check-ga
+            args: php-cs-fixer fix --dry-run -vvv

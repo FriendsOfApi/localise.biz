@@ -9,9 +9,10 @@
 
 namespace FAPI\Localise\Api;
 
-use FAPI\Localise\Model\Asset\Asset as AssetModel;
-use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
+use FAPI\Localise\Model\Asset\Asset as AssetModel;
+use FAPI\Localise\Model\Asset\TagDeleted;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -19,11 +20,19 @@ use FAPI\Localise\Exception;
 class Asset extends HttpApi
 {
     /**
+     * Get an asset.
+     * {@link https://localise.biz/api/docs/assets/getasset}.
+     */
+    public function get(string $projectKey, string $id): AssetModel
+    {
+        $response = $this->httpGet(sprintf('/api/assets/%s.json?key=%s', $id, $projectKey));
+
+        return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
+    /**
      * Create an asset.
      * {@link https://localise.biz/api/docs/assets/createasset}.
-     *
-     * @param string $projectKey
-     * @param string $id
      *
      * @return AssetModel|ResponseInterface
      *
@@ -58,10 +67,6 @@ class Asset extends HttpApi
      * Tag an asset.
      * {@link https://localise.biz/api/docs/assets/tagasset}.
      *
-     * @param string $projectKey
-     * @param string $id
-     * @param string $tag
-     *
      * @return AssetModel|ResponseInterface
      *
      * @throws Exception\DomainException
@@ -88,8 +93,6 @@ class Asset extends HttpApi
      * Patch an asset.
      * {@link https://localise.biz/api/docs/assets/patchasset}.
      *
-     * @param string $projectKey
-     * @param string $id
      * @param string $type
      * @param string $name
      * @param string $context
@@ -132,5 +135,16 @@ class Asset extends HttpApi
         }
 
         return $this->hydrator->hydrate($response, AssetModel::class);
+    }
+
+    /**
+     * Delete a tag.
+     * {@link https://localise.biz/api/docs/assets/untagasset}.
+     */
+    public function deleteTag(string $projectKey, string $assetId, string $tag): TagDeleted
+    {
+        $response = $this->httpDelete(sprintf('/api/assets/%s/tags/%s.json?key=%s', $assetId, $tag, $projectKey));
+
+        return $this->hydrator->hydrate($response, TagDeleted::class);
     }
 }

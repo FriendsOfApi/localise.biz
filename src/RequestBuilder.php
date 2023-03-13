@@ -17,7 +17,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  *
- * @internal This class should not be used outside of the API Client, it is not part of the BC promise.
+ * @internal this class should not be used outside of the API Client, it is not part of the BC promise
  */
 final class RequestBuilder
 {
@@ -46,19 +46,14 @@ final class RequestBuilder
     /**
      * Creates a new PSR-7 request.
      *
-     * @param string            $method
-     * @param string            $uri
-     * @param array             $headers
-     * @param array|string|null $body    Request body. If body is an array we will send a as multipart stream request.
-     *                                   If array, each array *item* MUST look like:
-     *                                   array (
-     *                                   'content' => string|resource|StreamInterface,
-     *                                   'name'    => string,
-     *                                   'filename'=> string (optional)
-     *                                   'headers' => array (optinal) ['header-name' => 'header-value']
-     *                                   )
-     *
-     * @return RequestInterface
+     * @param array|string|null $body Request body. If body is an array we will send a as multipart stream request.
+     *                                If array, each array *item* MUST look like:
+     *                                array (
+     *                                'content' => string|resource|StreamInterface,
+     *                                'name'    => string,
+     *                                'filename'=> string (optional)
+     *                                'headers' => array (optinal) ['header-name' => 'header-value']
+     *                                )
      */
     public function create(string $method, string $uri, array $headers = [], $body = null): RequestInterface
     {

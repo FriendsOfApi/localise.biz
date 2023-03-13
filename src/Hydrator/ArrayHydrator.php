@@ -19,12 +19,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 final class ArrayHydrator implements Hydrator
 {
-    /**
-     * @param ResponseInterface $response
-     * @param string            $class
-     *
-     * @return array
-     */
     public function hydrate(ResponseInterface $response, string $class): array
     {
         $body = $response->getBody()->__toString();

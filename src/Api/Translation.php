@@ -9,10 +9,10 @@
 
 namespace FAPI\Localise\Api;
 
-use FAPI\Localise\Model\Translation\TranslationDeleted;
-use FAPI\Localise\Model\Translation\Translation as TranslationModel;
-use Psr\Http\Message\ResponseInterface;
 use FAPI\Localise\Exception;
+use FAPI\Localise\Model\Translation\Translation as TranslationModel;
+use FAPI\Localise\Model\Translation\TranslationDeleted;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -22,10 +22,6 @@ class Translation extends HttpApi
     /**
      * Get a translation.
      * {@link https://localise.biz/api/docs/translations/gettranslation}.
-     *
-     * @param string $projectKey
-     * @param string $id
-     * @param string $locale
      *
      * @return TranslationModel|ResponseInterface
      *
@@ -50,11 +46,6 @@ class Translation extends HttpApi
      * Create a new translation.
      * {@link https://localise.biz/api/docs/translations/translate}.
      *
-     * @param string $projectKey
-     * @param string $id
-     * @param string $locale
-     * @param string $translation
-     *
      * @return TranslationModel|ResponseInterface
      *
      * @throws Exception
@@ -76,10 +67,6 @@ class Translation extends HttpApi
     /**
      * Delete translation
      * {@link https://localise.biz/api/docs/translations/untranslate}.
-     *
-     * @param string $projectKey
-     * @param string $id
-     * @param string $locale
      *
      * @return TranslationDeleted|ResponseInterface
      *

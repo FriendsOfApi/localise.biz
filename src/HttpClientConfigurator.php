@@ -9,19 +9,19 @@ declare(strict_types=1);
 
 namespace FAPI\Localise;
 
-use Http\Client\HttpClient;
+use Http\Client\Common\Plugin;
 use Http\Client\Common\PluginClient;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\UriFactory;
-use Http\Client\Common\Plugin;
 
 /**
  * Configure an HTTP client.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  *
- * @internal This class should not be used outside of the API Client, it is not part of the BC promise.
+ * @internal this class should not be used outside of the API Client, it is not part of the BC promise
  */
 final class HttpClientConfigurator
 {
@@ -50,19 +50,12 @@ final class HttpClientConfigurator
      */
     private $appendPlugins = [];
 
-    /**
-     * @param HttpClient|null $httpClient
-     * @param UriFactory|null $uriFactory
-     */
     public function __construct(HttpClient $httpClient = null, UriFactory $uriFactory = null)
     {
         $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
         $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
     }
 
-    /**
-     * @return HttpClient
-     */
     public function createConfiguredClient(): HttpClient
     {
         $plugins = $this->prependPlugins;
@@ -75,11 +68,6 @@ final class HttpClientConfigurator
         return new PluginClient($this->httpClient, array_merge($plugins, $this->appendPlugins));
     }
 
-    /**
-     * @param string $endpoint
-     *
-     * @return HttpClientConfigurator
-     */
     public function setEndpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
@@ -87,11 +75,6 @@ final class HttpClientConfigurator
         return $this;
     }
 
-    /**
-     * @param Plugin $plugin
-     *
-     * @return HttpClientConfigurator
-     */
     public function appendPlugin(Plugin ...$plugin): self
     {
         foreach ($plugin as $p) {
@@ -101,11 +84,6 @@ final class HttpClientConfigurator
         return $this;
     }
 
-    /**
-     * @param Plugin $plugin
-     *
-     * @return HttpClientConfigurator
-     */
     public function prependPlugin(Plugin ...$plugin): self
     {
         $plugin = array_reverse($plugin);

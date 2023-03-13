@@ -1,13 +1,13 @@
 <?php
 
-namespace FAPI\Localise\Model\Translation;
+namespace FAPI\Localise\Model\Asset;
 
 use FAPI\Localise\Model\CreatableFromArray;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class TranslationDeleted implements CreatableFromArray
+class TagDeleted implements CreatableFromArray
 {
     private $status;
 
@@ -20,7 +20,7 @@ class TranslationDeleted implements CreatableFromArray
     }
 
     /**
-     * @return TranslationDeleted
+     * @return TagDeleted
      */
     public static function createFromArray(array $data)
     {

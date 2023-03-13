@@ -37,6 +37,11 @@ class Asset implements CreatableFromArray
     /**
      * @var string
      */
+    private $printf;
+
+    /**
+     * @var string
+     */
     private $modified;
 
     /**
@@ -69,8 +74,6 @@ class Asset implements CreatableFromArray
     }
 
     /**
-     * @param array $data
-     *
      * @return Asset
      */
     public static function createFromArray(array $data)
@@ -110,13 +113,13 @@ class Asset implements CreatableFromArray
         if (isset($data['tags'])) {
             $self->setTags($data['tags']);
         }
+        if (isset($data['printf'])) {
+            $self->setPrintf($data['printf']);
+        }
 
         return $self;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -130,9 +133,6 @@ class Asset implements CreatableFromArray
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
@@ -146,9 +146,6 @@ class Asset implements CreatableFromArray
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -162,9 +159,6 @@ class Asset implements CreatableFromArray
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getContext(): string
     {
         return $this->context;
@@ -178,9 +172,6 @@ class Asset implements CreatableFromArray
         $this->context = $context;
     }
 
-    /**
-     * @return string
-     */
     public function getNotes(): string
     {
         return $this->notes;
@@ -194,9 +185,16 @@ class Asset implements CreatableFromArray
         $this->notes = $notes;
     }
 
-    /**
-     * @return string
-     */
+    public function getPrintf(): string
+    {
+        return $this->printf;
+    }
+
+    public function setPrintf(string $printf): void
+    {
+        $this->printf = $printf;
+    }
+
     public function getModified(): string
     {
         return $this->modified;
@@ -210,9 +208,6 @@ class Asset implements CreatableFromArray
         $this->modified = $modified;
     }
 
-    /**
-     * @return int
-     */
     public function getTranslated(): int
     {
         return $this->translated;
@@ -226,9 +221,6 @@ class Asset implements CreatableFromArray
         $this->translated = $translated;
     }
 
-    /**
-     * @return int
-     */
     public function getUntranslated(): int
     {
         return $this->untranslated;
@@ -242,9 +234,6 @@ class Asset implements CreatableFromArray
         $this->untranslated = $untranslated;
     }
 
-    /**
-     * @return int
-     */
     public function getIncomplate(): int
     {
         return $this->incomplate;
@@ -258,9 +247,6 @@ class Asset implements CreatableFromArray
         $this->incomplate = $incomplate;
     }
 
-    /**
-     * @return int
-     */
     public function getPlurals(): int
     {
         return $this->plural;
@@ -274,9 +260,6 @@ class Asset implements CreatableFromArray
         $this->plural = $plural;
     }
 
-    /**
-     * @return array
-     */
     public function getTags(): array
     {
         return $this->tags;
